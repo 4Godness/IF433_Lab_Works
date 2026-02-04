@@ -1,6 +1,13 @@
-package oop_001_johnthor.week01
+fun calculateDiscount(price: Int): Int =
+    if (price > 500000) {
+        (price * 80) / 100
+    } else {
+        (price * 90) / 100
+    }
 
 fun main() {
-    val gameTitle: String = "Elden Ring"
-    val price: Int = 650000
+    val gameTitle = "Elden Ring"
+    val price = 650000
+
+    val finalPrice = calculateDiscount(price)
 }
