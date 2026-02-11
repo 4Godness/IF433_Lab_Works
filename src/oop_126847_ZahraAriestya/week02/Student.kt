@@ -1,6 +1,7 @@
 package oop_126847_ZahraAriestya.week02
 
-class Student (val name: String, val nim: String, var major: String) {
+class Student(val name: String, val nim: String, var major: String) {
+
     init {
         // Validasi Sederhana: Cek panjang NIM
         if (nim.length != 5) {
@@ -9,5 +10,11 @@ class Student (val name: String, val nim: String, var major: String) {
         } else {
             println("LOG: Objek Student $name berhasil dialokasikan di Memory.")
         }
+    }
+
+    // Secondary Constructor (The Old Way)
+    constructor(name: String, nim: String) :
+            this(name, nim, "Non-Matriculated") {
+        println("INFO: Mahasiswa mendaftar tanpa memilih jurusan.")
     }
 }
