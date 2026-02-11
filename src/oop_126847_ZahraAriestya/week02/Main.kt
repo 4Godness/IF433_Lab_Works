@@ -16,7 +16,7 @@ fun main() {
     print("Pilihan: ")
 
     val choice = scanner.nextInt()
-    scanner.nextLine() // bersihkan buffer
+    scanner.nextLine()
 
     print("Masukkan Nama: ")
     val name = scanner.nextLine()
@@ -58,7 +58,6 @@ fun main() {
     print("Masukkan Lama Pinjam (hari): ")
     var duration = scanner.nextInt()
 
-    // Validasi tidak boleh minus
     if (duration < 0) {
         println("Durasi tidak boleh minus! Diubah menjadi 1 hari.")
         duration = 1
@@ -71,6 +70,75 @@ fun main() {
     println("Peminjam: ${loan.borrower}")
     println("Lama Pinjam: ${loan.loanDuration} hari")
     println("Total Denda: Rp ${loan.calculateFine()}")
+
+    // ==============================
+    // ===== MINI RPG BATTLE ========
+    // ==============================
+
+    println("\n===============================")
+    println("=== MINI RPG BATTLE GAME ===")
+    println("===============================")
+
+    scanner.nextLine() // bersihkan buffer sebelum input String lagi
+
+    print("Masukkan Nama Hero: ")
+    val heroName = scanner.nextLine()
+
+    print("Masukkan Base Damage Hero: ")
+    val damage = scanner.nextInt()
+
+    val hero = Hero(heroName, damage)
+
+    var enemyHp = 100
+
+    println("\nPertarungan Dimulai!")
+    println("$heroName VS Monster")
+    println("HP Monster: $enemyHp")
+    println("HP $heroName: ${hero.hp}")
+
+    while (hero.isAlive() && enemyHp > 0) {
+
+        println("\nPilih Aksi:")
+        println("1. Serang")
+        println("2. Kabur")
+        print("Pilihan: ")
+
+        val action = scanner.nextInt()
+
+        if (action == 1) {
+
+            hero.attack("Monster")
+            enemyHp -= hero.baseDamage
+
+            if (enemyHp < 0) {
+                enemyHp = 0
+            }
+
+            println("Sisa HP Monster: $enemyHp")
+
+            if (enemyHp > 0) {
+                val enemyDamage = (10..20).random()
+                println("Monster menyerang balik!")
+                hero.takeDamage(enemyDamage)
+            }
+
+        } else if (action == 2) {
+            println("$heroName kabur dari pertarungan!")
+            break
+        } else {
+            println("Pilihan tidak valid!")
+        }
+    }
+
+    println("\n=== HASIL PERTARUNGAN ===")
+
+    if (hero.isAlive() && enemyHp == 0) {
+        println("$heroName MENANG! 🎉")
+    } else if (!hero.isAlive()) {
+        println("$heroName KALAH... 💀")
+    } else {
+        println("Pertarungan berakhir tanpa pemenang.")
+    }
 
     scanner.close()
 }
