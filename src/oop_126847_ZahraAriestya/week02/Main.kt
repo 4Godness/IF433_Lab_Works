@@ -5,24 +5,33 @@ import java.util.Scanner
 fun main() {
     val scanner = Scanner(System.`in`)
 
-    println("--- APLIKASI PMB UMN ---")
+    println("=== APLIKASI PMB UMN ===")
+    println("1. Daftar dengan Jurusan")
+    println("2. Daftar tanpa memilih Jurusan")
+    print("Pilihan: ")
 
-    println("Masukkan Nama:")
+    val choice = scanner.nextInt()
+    scanner.nextLine()
+
+    print("Masukkan Nama: ")
     val name = scanner.nextLine()
 
-    println("Masukkan NIM (Wajib 5 Karakter): ")
-    val nim = scanner.next()
+    print("Masukkan NIM (5 Karakter): ")
+    val nim = scanner.nextLine()
 
-    scanner.nextLine() // Bersihkan buffer newline
-
-    if (nim.length != 5) {
-        println("ERROR: Pendaftaran dibatalkan. NIM harus 5 karakter!")
-    } else {
+    if (choice == 1) {
         print("Masukkan Jurusan: ")
         val major = scanner.nextLine()
 
         val s1 = Student(name, nim, major)
+        println("Status: Pendaftaran selesai (Dengan Jurusan).")
 
-        println("Status: Pendaftaran Selesai.")
+    } else if (choice == 2) {
+
+        val s2 = Student(name, nim)
+        println("Status: Pendaftaran selesai (Tanpa Jurusan).")
+
+    } else {
+        println("Pilihan tidak valid.")
     }
 }
