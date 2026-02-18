@@ -1,8 +1,22 @@
 package oop_126847_ZahraAriestya.week03
 
 fun main() {
-    println("=== Tugas 1: Testing Weapon Class ===")
+    println("=== Guided Lab: Employee Class ===")
+    val employee = Employee("Budi")
+    employee.salary = 5000
+    println("Nama: ${employee.name}, Gaji: ${employee.salary}")
 
+    println("\n--- Test Validasi Gaji ---")
+    employee.salary = -100
+    println("Gaji setelah set -100: ${employee.salary}")
+
+    println("\n--- Test Performance Rating ---")
+    employee.increasePerformance()
+    employee.increasePerformance()
+    employee.printStatus()
+    println("Tax: ${employee.tax}")
+
+    println("\n=== Tugas 1: Testing Weapon Class ===")
     // Membuat objek Weapon
     val pedang = Weapon("Excalibur")
     println("Senjata: ${pedang.name}")
