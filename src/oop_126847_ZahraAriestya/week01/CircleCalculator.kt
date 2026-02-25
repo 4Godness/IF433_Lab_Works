@@ -1,4 +1,4 @@
-package oop_126847_ZahraAriestyaSennova.week01
+package oop_126847_ZahraAriestya.week01
 
 fun main() {
     val radius = 7.0
