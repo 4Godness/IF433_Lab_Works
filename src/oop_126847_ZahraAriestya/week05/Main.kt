@@ -101,4 +101,47 @@ fun main() {
         metode.processPayment(75000.0)
         println("--------------------------------\n")
     }
+
+    // ========== BAGIAN 4: SMART CASTING CHALLENGE ==========
+    println("\n=== SMART CASTING CHALLENGE ===")
+    println("Mendeteksi metode pembayaran dan melakukan top up untuk EWallet:\n")
+
+// Melakukan perulangan kedua dengan smart casting
+    for ((index, metode) in daftarPembayaran.withIndex()) {
+        println("METODE PEMBAYARAN #${index + 1}")
+        println("--------------------------------")
+
+        // Smart casting dengan 'is' operator
+        when (metode) {
+            is EWallet -> {
+                println("✅ Terdeteksi sebagai E-Wallet (Account: ${metode.accountName})")
+                println("Status: Transaksi pertama gagal karena saldo tidak cukup!")
+                println("Saldo saat ini: Rp${String.format("%.0f", metode.balance)}")
+
+                // Melakukan top up
+                println("\n🔄 Melakukan pemulihan dengan top up...")
+                metode.topUp(50000.0)
+
+                // Mencoba proses pembayaran lagi setelah top up
+                println("\n🔄 Mencoba proses pembayaran lagi...")
+                metode.processPayment(75000.0)
+            }
+            is CreditCard -> {
+                println("✅ Terdeteksi sebagai Credit Card (Account: ${metode.accountName})")
+                println("Status: Transaksi pertama berhasil dalam limit")
+                println("Limit: Rp${String.format("%.0f", metode.limit)}")
+                println("Jumlah terpakai: Rp${String.format("%.0f", metode.usedAmount)}")
+            }
+        }
+        println("--------------------------------\n")
+    }
+
+    println("\n========== KESIMPULAN SISTEM PEMBAYARAN ==========")
+    println("✅ Polymorphic Collection: List<PaymentMethod> berisi")
+    println("   objek EWallet dan CreditCard")
+    println("✅ Abstraction: PaymentMethod sebagai abstract class")
+    println("   dengan abstract function processPayment()")
+    println("✅ Smart Casting: 'is' operator digunakan untuk")
+    println("   mendeteksi tipe dan mengakses fungsi spesifik")
+    println("==================================================")
 }
