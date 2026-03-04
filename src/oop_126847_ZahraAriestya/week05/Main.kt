@@ -1,4 +1,79 @@
 package oop_126847_ZahraAriestya.week05
 
-class Main {
+fun main() {
+    // ========== BAGIAN 1: DEMO POLYMORPHIC COLLECTION & SMART CASTING ==========
+    println("==========================================")
+    println("DEMO POLYMORPHIC COLLECTION & SMART CASTING")
+    println("==========================================\n")
+
+    val dosen1 = Dosen(nama = "Pak Alex", nidn = "0123456")
+    val admin1 = Admin(nama = "Bu Siti")
+
+    val daftarPegawai: List<Pegawai> = listOf(dosen1, admin1)
+
+    println("=== AKTIVITAS PEGAWAI ===")
+    for (pegawai in daftarPegawai) {
+        pegawai.bekerja()
+
+        when (pegawai){
+            is Dosen -> {
+                println("=> Terdeteksi sebagai Dosen (NIDN: ${pegawai.nidn})")
+                pegawai.mengajar()
+            }
+            is Admin -> {
+                println("=> Terdeteksi sebagai Admin")
+                pegawai.doAdminWork()
+            }
+        }
+        println("--------------------------")
+    }
+
+    println("\n\n")
+
+    // ========== BAGIAN 2: TUGAS MANDIRI 1 - COMPILE-TIME POLYMORPHISM ==========
+    println("==========================================")
+    println("TUGAS MANDIRI 1: COMPILE-TIME POLYMORPHISM")
+    println("============= (METHOD OVERLOADING) =============\n")
+
+    // Membuat objek MathHelper
+    val mathHelper = MathHelper()
+
+    println("\n1. Menghitung Luas Persegi")
+    println("---------------------------")
+    val sisiPersegi = 5
+    val luasPersegi = mathHelper.hitungLuas(sisiPersegi)
+    println("Sisi persegi: $sisiPersegi")
+    println("Luas persegi (sisi x sisi): $luasPersegi")
+
+    println("\n2. Menghitung Luas Persegi Panjang")
+    println("-----------------------------------")
+    val panjang = 8
+    val lebar = 4
+    val luasPersegiPanjang = mathHelper.hitungLuas(panjang, lebar)
+    println("Panjang: $panjang, Lebar: $lebar")
+    println("Luas persegi panjang (panjang x lebar): $luasPersegiPanjang")
+
+    println("\n3. Menghitung Luas Lingkaran")
+    println("----------------------------")
+    val jariJari = 7.0
+    val luasLingkaran = mathHelper.hitungLuas(jariJari)
+    println("Jari-jari lingkaran: $jariJari")
+    println("Luas lingkaran (3.14 x r x r): $luasLingkaran")
+
+    println("\n========== KESIMPULAN ==========")
+    println("Method overloading memungkinkan:")
+    println("• Nama fungsi sama: hitungLuas()")
+    println("• Parameter berbeda: (Int), (Int, Int), (Double)")
+    println("• Kotlin secara otomatis memanggil fungsi")
+    println("  yang sesuai berdasarkan argumen yang diberikan")
+    println("=================================")
+
+    // Demonstrasi tambahan: compile-time resolution
+    println("\n=== DEMO COMPILE-TIME RESOLUTION ===")
+    println("Memanggil hitungLuas(10) -> otomatis memilih versi persegi")
+    println("Hasil: ${mathHelper.hitungLuas(10)}")
+    println("Memanggil hitungLuas(6, 3) -> otomatis memilih versi persegi panjang")
+    println("Hasil: ${mathHelper.hitungLuas(6, 3)}")
+    println("Memanggil hitungLuas(5.0) -> otomatis memilih versi lingkaran")
+    println("Hasil: ${mathHelper.hitungLuas(5.0)}")
 }
