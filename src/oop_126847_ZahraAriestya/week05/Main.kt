@@ -76,4 +76,29 @@ fun main() {
     println("Hasil: ${mathHelper.hitungLuas(6, 3)}")
     println("Memanggil hitungLuas(5.0) -> otomatis memilih versi lingkaran")
     println("Hasil: ${mathHelper.hitungLuas(5.0)}")
+
+    println("\n\n")
+
+    // ========== BAGIAN 3: TUGAS MANDIRI 2 - SISTEM PEMBAYARAN ==========
+    println("==========================================")
+    println("TUGAS MANDIRI 2: SISTEM PEMBAYARAN")
+    println("===== (ABSTRACTION & SMART CASTING) =====\n")
+
+    // Membuat objek EWallet dan CreditCard
+    val eWallet = EWallet(accountName = "Zahra Ariestya", balance = 50000.0)
+    val creditCard = CreditCard(accountName = "Zahra Ariestya", limit = 100000.0)
+
+    // Memasukkan ke dalam list bertipe PaymentMethod (Polymorphic Collection)
+    val daftarPembayaran: List<PaymentMethod> = listOf(eWallet, creditCard)
+
+    println("=== DEMO PAYMENT POLYMORPHISM ===")
+    println("Melakukan pembayaran sebesar Rp75.000 menggunakan kedua metode:\n")
+
+    // Melakukan perulangan untuk memproses pembayaran
+    for ((index, metode) in daftarPembayaran.withIndex()) {
+        println("METODE PEMBAYARAN #${index + 1}")
+        println("--------------------------------")
+        metode.processPayment(75000.0)
+        println("--------------------------------\n")
+    }
 }
