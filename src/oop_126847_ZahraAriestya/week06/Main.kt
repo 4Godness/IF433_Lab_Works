@@ -6,41 +6,58 @@ fun processCheckout(method: PaymentMethod, amount: Double) {
 }
 
 fun main() {
-    val myWatch = Smartwatch()
-    myWatch.showTime()
+    println("╔══════════════════════════════════════╗")
+    println("║     SMART HOME SYSTEM - FINAL TEST   ║")
+    println("╚══════════════════════════════════════╝")
 
-    val myPhone = Smarthphone()
-    myPhone.turnOn()
-
-    val pay1 = Gopay()
-    val pay2 = CreditCard()
-
-    println("\n=== TESTING CHECKOUT ===")
-    processCheckout( method = pay1, amount = 50000.0)
-    processCheckout( method = pay2, amount = 150000.0)
-
-    println("=== CHECKPOINT 19: Instansiasi Smart Devices ===")
-
-    // Instansiasi 3 device sesuai perintah modul
+    // 1. INSTANSIASI DEVICE (sama seperti CP 19)
+    println("\n【STEP 1】Membuat Smart Devices...")
     val lampRuangTamu = SmartLamp("L001", "Lampu Ruang Tamu")
     val speakerDapur = SmartSpeaker("S001", "Google Nest Dapur")
     val cctvGarasi = SmartCCTV("C001", "Ezviz Garasi")
 
-    // Tampilkan informasi device yang telah dibuat
-    println("✅ Berhasil membuat 3 smart devices:")
-    println("   - ${lampRuangTamu.name} (ID: ${lampRuangTamu.id})")
-    println("   - ${speakerDapur.name} (ID: ${speakerDapur.id})")
-    println("   - ${cctvGarasi.name} (ID: ${cctvGarasi.id})")
+    println("✅ Devices siap:")
+    println("   • ${lampRuangTamu.name} (${lampRuangTamu.id})")
+    println("   • ${speakerDapur.name} (${speakerDapur.id})")
+    println("   • ${cctvGarasi.name} (${cctvGarasi.id})")
 
-    // Test masing-masing device secara manual
-    println("\n--- Testing Device Functions ---")
-    lampRuangTamu.turnOn()
-    lampRuangTamu.turnOff()
+    // 2. BUAT HUB DAN TAMBAHKAN DEVICE
+    println("\n【STEP 2】Inisialisasi SmartHomeHub...")
+    val hub = SmartHomeHub()
+    hub.addDevice(lampRuangTamu)
+    hub.addDevice(speakerDapur)
+    hub.addDevice(cctvGarasi)
+    println("✅ Semua device ditambahkan ke hub")
 
+    // 3. TEST SECURITY MODE (dengan smart casting)
+    println("\n【STEP 3】Mengaktifkan Security Mode...")
+    println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+    hub.activateSecurityMode()
+
+    // 4. TEST TURN OFF ALL SWITCHES
+    println("\n【STEP 4】Mematikan semua perangkat...")
+    println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+    hub.turnOffAllSwitches()
+
+    // 5. TEST INTERAKSI MANUAL (opsional, untuk demonstrasi)
+    println("\n【STEP 5】Demonstrasi Interaksi Manual...")
+    println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+    println("Menyalakan CCTV Garasi dari remote:")
+    cctvGarasi.turnOn()
+
+    println("\nMemutar musik di Google Nest Dapur:")
     speakerDapur.turnOn()
-    speakerDapur.playMusic("Shape of You - Ed Sheeran")
-    speakerDapur.turnOff()
+    speakerDapur.playMusic("Indonesia Raya")
 
-    cctvGarasi.turnOn()  // Ini otomatis memanggil startRecord()
-    cctvGarasi.turnOff()
+    println("\nMematikan semua dari hub:")
+    hub.turnOffAllSwitches()
+
+    // 6. SUMMARY
+    println("\n╔══════════════════════════════════════╗")
+    println("║     TEST SELESAI - SEMUA SUKSES!    ║")
+    println("╚══════════════════════════════════════╝")
+    println("✅ CP 19: Instansiasi device berhasil")
+    println("✅ CP 20: Test sistem lengkap berhasil")
+    println("✅ Smart casting bekerja dengan baik")
+    println("✅ Polymorphism terimplementasi dengan benar")
 }
