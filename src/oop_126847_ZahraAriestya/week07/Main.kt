@@ -39,8 +39,7 @@ fun main() {
     val uiMessage = when (response) {
         is ApiResponse.Success -> "Tampilkan data: ${response.data}"
         is ApiResponse.Error -> "Tampilkan error: ${response.message}"
-        // ❌ SENGAJA tidak menambahkan Loading
+        ApiResponse.Loading -> "Tampilkan loading..."
     }
-
     println(uiMessage)
 }
