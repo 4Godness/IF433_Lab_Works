@@ -33,4 +33,14 @@ fun main() {
     // destructuring
     val (name, age) = user2
     println("Destructured -> Name: $name, Age: $age")
+
+    println("\n=== TEST SEALED CLASS (WHEN) ===")
+    val response: ApiResponse = ApiResponse.Success("Data berhasil diambil")
+    val uiMessage = when (response) {
+        is ApiResponse.Success -> "Tampilkan data: ${response.data}"
+        is ApiResponse.Error -> "Tampilkan error: ${response.message}"
+        // ❌ SENGAJA tidak menambahkan Loading
+    }
+
+    println(uiMessage)
 }
