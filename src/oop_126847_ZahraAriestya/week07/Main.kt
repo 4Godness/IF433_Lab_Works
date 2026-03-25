@@ -42,4 +42,8 @@ fun main() {
         ApiResponse.Loading -> "Tampilkan loading..."
     }
     println(uiMessage)
+
+    println("\n=== TEST GAME MANAGER ===")
+    GameManager.startGame()
+    GameManager.startGame()
 }
