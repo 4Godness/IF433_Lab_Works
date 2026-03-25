@@ -1,6 +1,7 @@
 package oop_126847_ZahraAriestya.week07
 
 fun main() {
+
     println("=== TEST SINGLETON ===")
     println("Status: ${DatabaseManager.connectionStatus}")
     DatabaseManager.connect()
@@ -22,25 +23,24 @@ fun main() {
     println("Sama? ${data1 == data2}")
 
     println("\n=== TEST COPY & DESTRUCTURING ===")
-
     val user1 = DataUser("Alice", 22)
-    // copy → buat object baru dari user1
     val user2 = user1.copy(age = 25)
 
     println("User1: $user1")
     println("User2 (hasil copy): $user2")
 
-    // destructuring
     val (name, age) = user2
     println("Destructured -> Name: $name, Age: $age")
 
     println("\n=== TEST SEALED CLASS (WHEN) ===")
     val response: ApiResponse = ApiResponse.Success("Data berhasil diambil")
+
     val uiMessage = when (response) {
         is ApiResponse.Success -> "Tampilkan data: ${response.data}"
         is ApiResponse.Error -> "Tampilkan error: ${response.message}"
         ApiResponse.Loading -> "Tampilkan loading..."
     }
+
     println(uiMessage)
 
     println("\n=== TEST GAME MANAGER ===")
@@ -48,13 +48,22 @@ fun main() {
     GameManager.startGame()
 
     println("\n=== TEST RARITY & WEAPON FORGE ===")
-    // Ambil drop chance dari enum
     println("Drop chance LEGENDARY: ${ItemRarity.LEGENDARY.dropChance}%")
-    // Buat senjata dari factory
+
     val starterWeapon = Weapon.forgeStarterSword()
+
     println("Senjata awal:")
     println("Nama: ${starterWeapon.item.name}")
     println("Damage: ${starterWeapon.item.damage}")
     println("Rarity: ${starterWeapon.item.rarity}")
     println("Durability: ${starterWeapon.durability}")
+
+    println("\n=== TEST GAME FLOW ===")
+
+    val upgradedItem = starterWeapon.item.copy(damage = 25)
+
+    processEvent(BattleState.SafeZone)
+    processEvent(BattleState.MonsterEncounter("Goblin Nakal"))
+    processEvent(BattleState.LootDropped(upgradedItem))
+    processEvent(BattleState.GameOver("Terkena jebakan racun"))
 }
