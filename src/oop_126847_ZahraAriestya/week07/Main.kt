@@ -20,4 +20,17 @@ fun main() {
     val data2 = DataUser("Alice", 22)
     println(data1)
     println("Sama? ${data1 == data2}")
+
+    println("\n=== TEST COPY & DESTRUCTURING ===")
+
+    val user1 = DataUser("Alice", 22)
+    // copy → buat object baru dari user1
+    val user2 = user1.copy(age = 25)
+
+    println("User1: $user1")
+    println("User2 (hasil copy): $user2")
+
+    // destructuring
+    val (name, age) = user2
+    println("Destructured -> Name: $name, Age: $age")
 }
