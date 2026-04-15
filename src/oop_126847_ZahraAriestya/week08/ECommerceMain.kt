@@ -44,4 +44,6 @@ fun main() {
     }
 
     println("=== PROCESSING COMPLETE ===")
+
+    //sudah di testing (test full e-commerce pipeline in main)
 }
