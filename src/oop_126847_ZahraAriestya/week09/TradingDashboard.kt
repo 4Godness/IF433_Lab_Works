@@ -13,4 +13,8 @@ fun main() {
 
     println("=== Total Trade History: ${tradeHistory.size} trades ===")
     tradeHistory.forEach { println(it) }
+
+    val closedTrades = tradeHistory.filter { it.status == "CLOSED" }
+    println("\n=== CLOSED TRADES (${closedTrades.size} items) ===")
+    closedTrades.forEach { println(it) }
 }
