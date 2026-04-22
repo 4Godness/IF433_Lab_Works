@@ -64,4 +64,6 @@ fun main() {
     println("\n" + "=".repeat(50))
     println("Note: OPEN positions are excluded from win/loss analysis")
     println("=".repeat(50))
+
+    //Sudah dijalankan sepenuhnya
 }
