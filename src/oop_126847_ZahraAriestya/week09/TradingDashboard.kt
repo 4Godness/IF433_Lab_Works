@@ -54,4 +54,14 @@ fun main() {
 
     println("\n🏆 TOP PERFORMERS (Highest ROE):")
     topPerformersString.forEach { println("  ➜ $it") }
+
+    println("\n📉 WORST PERFORMERS (Lowest ROE):")
+    worstPerformersString.forEach { println("  ➜ $it") }
+
+    println("\n🪙 UNIQUE PAIRS TRADED:")
+    uniquePairs.forEach { println("  ➜ $it") }
+
+    println("\n" + "=".repeat(50))
+    println("Note: OPEN positions are excluded from win/loss analysis")
+    println("=".repeat(50))
 }
