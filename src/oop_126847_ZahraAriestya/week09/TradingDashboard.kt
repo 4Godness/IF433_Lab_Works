@@ -46,4 +46,12 @@ fun main() {
 
     println("\n=== UNIQUE TRADING PAIRS ===")
     println(uniquePairs)
+
+    // ========== DASHBOARD UTAMA ==========
+    println("\n" + "=".repeat(50))
+    println("        CRYPTO TRADING DASHBOARD")
+    println("=".repeat(50))
+
+    println("\n🏆 TOP PERFORMERS (Highest ROE):")
+    topPerformersString.forEach { println("  ➜ $it") }
 }
