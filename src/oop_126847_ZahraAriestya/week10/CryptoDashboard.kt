@@ -38,4 +38,21 @@ fun main() {
 
     println("=".repeat(40))
     println("Total aset: ${response.data.size} jenis koin")
+
+    // CHECKPOINT 19: Menambahkan Transaksi
+    val txRepo = WalletRepository<Transaction>()
+
+    txRepo.add(Transaction("TX001", 0.05))
+    txRepo.add(Transaction("TX002", 0.12))
+    txRepo.add(Transaction("TX003", 25.75))
+    txRepo.add(Transaction("TX004", 0.03))
+
+    println("\n=== TRANSACTION HISTORY ===")
+    println("=".repeat(40))
+    println("Daftar Transaksi:")
+    txRepo.getAll().forEach { tx ->
+        println("  📎 ${tx.id}: ${tx.amount} BTC")
+    }
+    println("=".repeat(40))
+    println("Total transaksi: ${txRepo.getAll().size}")
 }
