@@ -1,4 +1,4 @@
-package oop_126847_ZahraAriestya.week10
+package oop_126847_ZahraAireysta.week10
 
 class WalletRepository<T> {
     private val items = mutableListOf<T>()
@@ -7,5 +7,7 @@ class WalletRepository<T> {
         items.add(item)
     }
 
-    fun getAll(): List<T> = items
+    fun getAll(): List<T> {
+        return items
+    }
 }
