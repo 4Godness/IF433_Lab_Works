@@ -29,13 +29,20 @@ fun main() {
     coinRepo.add(Coin("Bitcoin (BTC)", 0.85))
     coinRepo.add(Coin("Ethereum (ETH)", 4.20))
     coinRepo.add(Coin("Tether (USDT)", 1250.50))
+    coinRepo.add(Coin("Solana (SOL)", 15.30))
 
-    // Verifikasi: tampilkan total coins
-    println("Total coins: ${coinRepo.getAll().size}")
+    // Checkpoint 17: Simulasi Response Jaringan
+    // Bungkus semua koin dalam ApiResponse
+    val response = ApiResponse("200 OK", coinRepo.getAll())
 
-    // Tampilkan semua koin
-    println("\nCoin List:")
-    coinRepo.getAll().forEach { coin ->
+    // Tampilkan status response
+    println("\n=== API RESPONSE ===")
+    println("Status: ${response.status}")
+    println("Total data: ${response.data.size} items")
+
+    // Tampilkan data koin dari response
+    println("\nCoin List from API Response:")
+    response.data.forEach { coin ->
         println("- ${coin.name}: ${coin.balance}")
     }
 }
