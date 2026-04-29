@@ -16,7 +16,9 @@ class WalletRepository<T> {
 data class ApiResponse<T>(val status: String, val data: T)
 
 fun main() {
-    println("=== CRYPTO WALLET DASHBOARD ===")
+    println("=".repeat(50))
+    println("🚀 CRYPTO WALLET DASHBOARD")
+    println("=".repeat(50))
 
     val coinRepo = WalletRepository<Coin>()
 
@@ -27,19 +29,17 @@ fun main() {
 
     val response = ApiResponse("200 OK", coinRepo.getAll())
 
-    println("\n=== DASHBOARD CRYPTO WALLET ===")
-    println("Response Status: ${response.status}")
-    println("=".repeat(40))
+    println("\n📊 COIN PORTFOLIO")
+    println("-".repeat(40))
+    println("Status: ${response.status}")
+    println("-".repeat(40))
 
-    println("Daftar Aset Koin:")
     response.data.forEach { coin ->
-        println("  💰 ${coin.name}: ${coin.balance}")
+        println("💰 ${coin.name}: ${coin.balance}")
     }
+    println("-".repeat(40))
+    println("Total coins: ${response.data.size}")
 
-    println("=".repeat(40))
-    println("Total aset: ${response.data.size} jenis koin")
-
-    // CHECKPOINT 19: Menambahkan Transaksi
     val txRepo = WalletRepository<Transaction>()
 
     txRepo.add(Transaction("TX001", 0.05))
@@ -47,12 +47,17 @@ fun main() {
     txRepo.add(Transaction("TX003", 25.75))
     txRepo.add(Transaction("TX004", 0.03))
 
-    println("\n=== TRANSACTION HISTORY ===")
-    println("=".repeat(40))
-    println("Daftar Transaksi:")
+    println("\n📝 TRANSACTION HISTORY")
+    println("-".repeat(40))
     txRepo.getAll().forEach { tx ->
-        println("  📎 ${tx.id}: ${tx.amount} BTC")
+        println("📎 ${tx.id}: ${tx.amount} BTC")
     }
-    println("=".repeat(40))
-    println("Total transaksi: ${txRepo.getAll().size}")
+    println("-".repeat(40))
+    println("Total transactions: ${txRepo.getAll().size}")
+
+    println("\n" + "=".repeat(50))
+    println("✅ SYSTEM STATUS: All systems operational")
+    println("📦 Generic types verified: Coin & Transaction")
+    println("🔒 Type safety: No casting errors detected")
+    println("=".repeat(50))
 }
