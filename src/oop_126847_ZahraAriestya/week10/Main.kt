@@ -1,6 +1,11 @@
 package oop_126847_ZahraAriestya.week10
 
 fun main() {
+    println("\n=== TEST GENERIC FUNCTIONS ===")
+    printData(3.14)
+    val result =processData("Stable Coin")
+    println("Hasil proses: $result")
+
     println("=== TEST GENERIC CLASS ===")
     val intBox = Box(100)
     val stringBox = Box("Generics in Kotlin")
