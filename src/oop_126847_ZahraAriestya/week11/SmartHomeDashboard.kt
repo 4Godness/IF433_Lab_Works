@@ -39,4 +39,9 @@ fun main() {
         sumOf { it.powerLoad }
     }
     println("Total daya keseluruhan: $totalPower Watt")
+
+    println("\n=== DASHBOARD SMART HOME ===")
+    homeDevices.forEach { device ->
+        println(device.diagnose())
+    }
 }
