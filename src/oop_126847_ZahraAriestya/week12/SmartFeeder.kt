@@ -46,17 +46,19 @@ fun main() {
     println("\n=== JADWAL MAKAN SORE ===")
     println("Pemilik sudah mengisi ulang stok. Alat normal kembali.")
 
-    val result = runCatching {
-        println("Mencoba mengeluarkan kibble 30 gr dari stok 1000 gr...")
+    var currentKibbleStockSore = 1000
+    println("Stok kibble sore awal: $currentKibbleStockSore gr")
+
+    runCatching {
+        println("Mencoba mengeluarkan kibble 30 gr...")
         dispenseKibble(
             requestedGram = 30,
-            availableGram = 1000,
+            availableGram = currentKibbleStockSore,
             isJammed = false
         )
-    }
-
-    result.onSuccess { newStock ->
-        println("Sukses! Sisa stok kibble: $newStock gr")
+    }.onSuccess { newStock ->
+        currentKibbleStockSore = newStock
+        println("Makan sore sukses! Sisa stok kibble: $currentKibbleStockSore gr")
     }.onFailure { exception ->
         when (exception) {
             is DispenserJamException -> println("Gagal: ${exception.message}")
@@ -65,9 +67,6 @@ fun main() {
             else -> println("Gagal: Terjadi error tak terduga - ${exception.message}")
         }
     }
-
-    val finalStock = result.getOrElse { 1000 }
-    println("Stok akhir setelah jadwal sore: $finalStock gr")
 
     println("\n--- Program Selesai ---")
 }
