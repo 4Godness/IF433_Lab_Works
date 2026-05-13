@@ -59,13 +59,51 @@ fun main() {
     }.onSuccess { newStock ->
         currentKibbleStockSore = newStock
         println("Makan sore sukses! Sisa stok kibble: $currentKibbleStockSore gr")
-    }.onFailure { exception ->
-        when (exception) {
-            is DispenserJamException -> println("Gagal: ${exception.message}")
-            is FoodEmptyException -> println("Gagal: ${exception.message}")
-            is IllegalArgumentException -> println("Gagal: ${exception.message}")
-            else -> println("Gagal: Terjadi error tak terduga - ${exception.message}")
-        }
+    }.onFailure { error ->
+        println("Peringatan ke Pemilik: ${error.message}")
+        println("(Opsional: Berikan chicken jerky secara manual)")
+    }
+
+    println("\n=== JADWAL MAKAN MALAM ===")
+    println("Simulasi skenario kegagalan (stok habis)")
+
+    var nightStock = 10
+    println("Stok kibble malam awal: $nightStock gr")
+
+    runCatching {
+        println("Mencoba mengeluarkan kibble 50 gr...")
+        dispenseKibble(
+            requestedGram = 50,
+            availableGram = nightStock,
+            isJammed = false
+        )
+    }.onSuccess { newStock ->
+        nightStock = newStock
+        println("Makan malam sukses! Sisa stok kibble: $nightStock gr")
+    }.onFailure { error ->
+        println("Peringatan ke Pemilik: ${error.message}")
+        println("(Opsional: Berikan chicken jerky secara manual)")
+    }
+
+    println("\n=== JADWAL MAKAN TENGAH MALAM ===")
+    println("Simulasi skenario kegagalan (dispenser macet)")
+
+    var midnightStock = 500
+    println("Stok kibble tengah malam awal: $midnightStock gr")
+
+    runCatching {
+        println("Mencoba mengeluarkan kibble 40 gr...")
+        dispenseKibble(
+            requestedGram = 40,
+            availableGram = midnightStock,
+            isJammed = true
+        )
+    }.onSuccess { newStock ->
+        midnightStock = newStock
+        println("Makan tengah malam sukses! Sisa stok kibble: $midnightStock gr")
+    }.onFailure { error ->
+        println("Peringatan ke Pemilik: ${error.message}")
+        println("(Opsional: Berikan chicken jerky secara manual)")
     }
 
     println("\n--- Program Selesai ---")
