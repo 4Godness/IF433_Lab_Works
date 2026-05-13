@@ -59,7 +59,29 @@ fun contoh_multiple_catch(nilai:String) {
     }
 }
 
+sealed class ATMException(pesan:String): Exception(pesan);
+
+class saldo_dibawah_nol(val saldoKamu:Int): ATMException(pesan = "Masa saldo $saldoKamu minus")
+class cek_jumlah_saldo(val saldoAwal:Int, jajan:Int):
+    ATMException(pesan = "Saldo tinggal $saldoAwal, kamu jajan $jajan, kurang mpruy")
+
+fun mulai_jajan(saldoAwalKamu:Int, jajanKamu:Int):Int {
+    if(jajanKamu > saldoAwalKamu) {
+        throw cek_jumlah_saldo(saldoAwalKamu, jajanKamu)
+    } else if (saldoAwalKamu < 8) {
+        throw saldo_dibawah_nol(saldoKamu = saldoAwalKamu)
+    } else {
+        println("Transaksi sukses!")
+    }
+    return saldoAwalKamu - jajanKamu
+}
+
 fun main() {
+    runCatching {mulai_jajan(saldoAwalKamu = 1000, jajanKamu = 900)}
+        .onSuccess{println("Transaksi berhasil: $it")}
+        .onFailure{println("Transaksi gagal: $it")}
+    mulai_jajan(saldoAwalKamu = 1000, jajanKamu = 900)
+
     contoh_multiple_catch(nilai = "100")
     val nsiswa = nilai_siswa(kkm = 70)
     nsiswa.input_nilai(nilaiKamu = 71)
