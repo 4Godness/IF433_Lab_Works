@@ -10,7 +10,6 @@ fun dispenseKibble(requestedGram: Int, availableGram: Int, isJammed: Boolean): I
         throw FoodEmptyException(requestedGram, availableGram)
     }
 
-    // Jika semua aman, cetak pesan dan return sisa stok
     println("Kibble berhasil dikeluarkan!")
     return availableGram - requestedGram
 }
@@ -18,7 +17,6 @@ fun dispenseKibble(requestedGram: Int, availableGram: Int, isJammed: Boolean): I
 fun main() {
     println("=== SMART PET FEEDER SYSTEM ===")
 
-    // Variabel awal stok kibble = 50 gram
     var currentKibbleStock = 50
     println("Stok kibble awal: $currentKibbleStock gr")
     println("\n=== JADWAL MAKAN PAGI ===")
@@ -44,6 +42,32 @@ fun main() {
     } finally {
         println("Siklus pengecekan dispenser pagi selesai.")
     }
+
+    println("\n=== JADWAL MAKAN SORE ===")
+    println("Pemilik sudah mengisi ulang stok. Alat normal kembali.")
+
+    val result = runCatching {
+        println("Mencoba mengeluarkan kibble 30 gr dari stok 1000 gr...")
+        dispenseKibble(
+            requestedGram = 30,
+            availableGram = 1000,
+            isJammed = false
+        )
+    }
+
+    result.onSuccess { newStock ->
+        println("Sukses! Sisa stok kibble: $newStock gr")
+    }.onFailure { exception ->
+        when (exception) {
+            is DispenserJamException -> println("Gagal: ${exception.message}")
+            is FoodEmptyException -> println("Gagal: ${exception.message}")
+            is IllegalArgumentException -> println("Gagal: ${exception.message}")
+            else -> println("Gagal: Terjadi error tak terduga - ${exception.message}")
+        }
+    }
+
+    val finalStock = result.getOrElse { 1000 }
+    println("Stok akhir setelah jadwal sore: $finalStock gr")
 
     println("\n--- Program Selesai ---")
 }
