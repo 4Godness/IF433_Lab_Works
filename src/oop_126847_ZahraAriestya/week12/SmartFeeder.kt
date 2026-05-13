@@ -20,6 +20,26 @@ fun main() {
 
     // Variabel awal stok kibble = 50 gram
     var currentKibbleStock = 50
-
     println("Stok kibble awal: $currentKibbleStock gr")
+    println("\n=== JADWAL MAKAN PAGI ===")
+
+    try {
+        println("Mencoba mengeluarkan kibble 80gr")
+        val newStock = dispenseKibble(
+            requestedGram = 80,
+            availableGram = currentKibbleStock,
+            isJammed = false
+        )
+        currentKibbleStock = newStock
+        println("Sisa stok kibble: $currentKibbleStock gr")
+    } catch (e: DispenserJamException) {
+        println("[ERROR] ${e.message}")
+        println("Silahkan periksa wadah dispenser dan coba lagi!")
+    } catch (e: FoodEmptyException) {
+        println("[ERROR] ${e.message}")
+        println("Silakan isi ulang stok kibble!")
+
+    } catch (e: Exception) {
+        println("[ERROR] Terjadi kesalahan tak terduga: ${e.message}")
+    }
 }
