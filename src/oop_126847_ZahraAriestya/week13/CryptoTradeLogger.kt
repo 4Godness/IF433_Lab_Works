@@ -60,4 +60,10 @@ fun main() {
     // INJECT DATA KORUP - untuk testing robustness
     File("crypto_trades.csv").appendText("CORRUPT_ID,DOGEUSDT,Hold,XX,YY\n")
     println("Data korup telah diinject untuk testing")
+
+    // Tarik histori transaksi dengan loadTrades
+    val loadedData = loadTrades("crypto_trades.csv")
+
+    // Hitung jumlah PnL bersih menggunakan sumOf
+    val totalPnL = loadedData.sumOf { it.pnl }
 }
