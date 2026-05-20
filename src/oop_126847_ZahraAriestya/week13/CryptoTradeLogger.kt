@@ -45,3 +45,15 @@ fun loadTrades(path: String): List<TradeRecord> {
         emptyList()
     }
 }
+
+fun main() {
+    // Membuat mock data riwayat trade simulasi
+    val trades = listOf(
+        TradeRecord(id = 1, symbol = "BTCUSDT", type = "Long", margin = 1000.0, pnl = 250.0),
+        TradeRecord(id = 2, symbol = "ETHUSDT", type = "Short", margin = 500.0, pnl = 175.0),
+        TradeRecord(id = 3, symbol = "SOLUSDT", type = "Long", margin = 300.0, pnl = 89.5)
+    )
+
+    // Menyimpan ke file crypto_trades.csv
+    saveTrades(trades, path = "crypto_trades.csv")
+}
