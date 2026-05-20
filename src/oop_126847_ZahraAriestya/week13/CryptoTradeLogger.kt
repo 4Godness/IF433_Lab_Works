@@ -66,4 +66,13 @@ fun main() {
 
     // Hitung jumlah PnL bersih menggunakan sumOf
     val totalPnL = loadedData.sumOf { it.pnl }
+
+    // Cetak seluruh entri transaksi yang valid ke layar konsol
+    println("\n=== VALID TRADE RECORDS ===")
+    loadedData.forEach { trade ->
+        println("ID: ${trade.id}, Symbol: ${trade.symbol}, Type: ${trade.type}, Margin: ${trade.margin}, PnL: ${trade.pnl}")
+    }
+
+    // Cetak baris penutup dengan total PnL
+    println("\n==== TOTAL PnL BERSIH: $totalPnL ====")
 }
